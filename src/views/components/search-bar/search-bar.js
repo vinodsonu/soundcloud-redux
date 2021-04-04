@@ -1,14 +1,13 @@
-import React from 'react';
-import classNames from 'classnames';
-import PropTypes from 'prop-types';
+import React from "react";
+import classNames from "classnames";
+import PropTypes from "prop-types";
 
-import './search-bar.css';
-
+import "./search-bar.css";
 
 class SearchBar extends React.Component {
   static propTypes = {
     handleSearch: PropTypes.func.isRequired,
-    search: PropTypes.object.isRequired
+    search: PropTypes.object.isRequired,
   };
 
   constructor() {
@@ -17,13 +16,17 @@ class SearchBar extends React.Component {
   }
 
   componentDidMount() {
-    this.searchBar.addEventListener('transitionend', () => {
-      if (this.props.search.open) this.input.focus();
-    }, false);
+    this.searchBar.addEventListener(
+      "transitionend",
+      () => {
+        if (this.props.search.open) this.input.focus();
+      },
+      false
+    );
   }
 
   componentWillUpdate(nextProps) {
-    if (nextProps.search.open) this.input.value = '';
+    if (nextProps.search.open) this.input.value = "";
   }
 
   handleSubmit(event) {
@@ -34,19 +37,23 @@ class SearchBar extends React.Component {
   }
 
   render() {
-    const cssClasses = classNames('search-bar', {
-      'search-bar--open': this.props.search.open
+    const cssClasses = classNames("search-bar", {
+      "search-bar--open": this.props.search.open,
     });
 
     return (
-      <div className={cssClasses} ref={e => this.searchBar = e} role="search">
+      <div
+        className={cssClasses}
+        ref={(e) => (this.searchBar = e)}
+        role="search"
+      >
         <form className="search-form" onSubmit={this.handleSubmit} noValidate>
           <input
             autoComplete="off"
             className="search-form__input"
             maxLength="60"
-            placeholder="Search Tracks"
-            ref={e => this.input = e}
+            placeholder="Enter your mood"
+            ref={(e) => (this.input = e)}
             tabIndex="0"
             type="text"
           />
